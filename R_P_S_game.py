@@ -5,8 +5,7 @@ RPS_GAME_CHOICES = ('r', 'p', 's')
 
 def again_still_right_choice(player_name):
     player_choice = getpass.getpass("\nEnter your "+ str(player_name) + " choice:  ")
-    # print(type(player_choice))
-    while str(player_choice).lower() not in RPS_GAME_CHOICES:
+    while player_choice.lower() not in RPS_GAME_CHOICES:
         print("-"*30)
         print("""
             Please enter your choice again
@@ -30,7 +29,7 @@ def get_players_choice():
 
 def check_result_rps_game(player_choices):
     first_player_win = "first player win"
-    second_player_win = "second player win"
+    second_player_win = "second player win"    
     two_player_draw = "two player draw"
 
     first_player_win_cases = [('r', 's'), ('s', 'p'), ('p', 'r')]
@@ -75,20 +74,40 @@ def is_play_again():
         return False
 
 def rps_game():
+    games_first_player_win = 0
+    games_second_player_win = 0
+    number_of_games = 0
     while True:
         display_rps_rule()
+
+        print("-"*30)
+        number_of_games += 1
+        print("\n The ", number_of_games, " games")
 
         player_choices_ = get_players_choice()
         rps_result = check_result_rps_game(player_choices_)
 
+        if rps_result == "first player win":
+            games_first_player_win += 1
+        if rps_result == "second player win":
+            games_second_player_win += 1
+        if rps_result == "two player draw":
+            games_second_player_win += 1
+            games_first_player_win += 1
+        
+        game_score = (games_first_player_win, games_second_player_win)
         print(rps_result)
         print("\nFirst player choose: ", player_choices_[0])
         print("\nSecond player choose: ", player_choices_[1])
-        
+        print("\nFinal Game Score: ", game_score)
+
         if is_play_again() == True:
             continue
         else:
+            print("\n\tGame Score: (first player - second player)")
+            print("\n\t\t\t", game_score)
+            print("\n\tThank you!")
             break
-
+        
 # start rps-game
 rps_game()

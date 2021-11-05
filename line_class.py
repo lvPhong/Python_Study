@@ -6,7 +6,7 @@ from check_error import is_equal
 
 class Line():
     """equation of a line in Descartes Oxy has a form :
-        ax + self.b + c =self.c0, it's direction vector is (a, b)
+        ax + by + c = 0, it's direction vector is (a, b)
         with a, b, c are real numbers.
     """
     def __init__(self, a, b, c):
